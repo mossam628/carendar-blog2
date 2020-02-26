@@ -5,14 +5,20 @@
     %title CarendarBlog2
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+    %link{:href => "fullcalendar/fullcalendar.css", :rel => "stylesheet"}/
+    %script{:src => "fullcalendar/lib/jquery.min.js"}
+    %script{:src => "fullcalendar/lib/moment.min.js"}
+    %script{:src => "fullcalendar/fullcalendar.js"}
+    %script{:src => "locale/ja.js"}
   %body
     %header.header
       .header__title
         = link_to "Pet Blog", root_path, class: "header__title--text"
       .header__right
         - if user_signed_in?
+          = link_to "carendar", calender_index_path, class: "header__right--btn"
           = link_to current_user.nickname, user_path(current_user), class: "header__right--btn"
           = link_to "新規投稿", new_post_path, class: "header__right--btn"
           = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "header__right--btn"
