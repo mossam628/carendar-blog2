@@ -17,6 +17,13 @@ body{
     &__title{
       font-size: 30px;
       line-height: 56px;
+      &:before {
+        font-family: "Font Awesome 5 Free"; 
+        content: "\f1b0";
+        font-weight: 900; 
+        left : 1em; /*左端からのアイコンまで*/
+        color: #ff938b; /*アイコン色*/
+      }
       &--text{
         text-decoration: none;
         color: #fff;
@@ -149,4 +156,24 @@ body{
   .user{
     padding: 15px 30px;
   }
+}
+.header {
+  border: solid 2px #ff938b;
+  background: #fffaf1;
+  padding: 0.5em 1em 0.5em 2.3em;
+  position: relative;
+}
+
+ul li {
+  line-height: 1.5;
+  padding: 0.5em 0;
+  list-style-type: none!important;/*ポチ消す*/
+}
+
+ul li:before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f1b0";/*アイコン種類*/
+  position: absolute;
+  left : 1em; /*左端からのアイコンまで*/
+  color: #ff938b; /*アイコン色*/
 }
