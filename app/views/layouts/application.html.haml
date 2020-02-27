@@ -12,7 +12,7 @@
     %script{:src => "fullcalendar/lib/moment.min.js"}
     %script{:src => "fullcalendar/fullcalendar.js"}
     %script{:src => "locale/ja.js"}
-  %body
+  %body{"data-turbolinks" => "false"}
     %header.header
       .header__title
         = link_to "Pet Blog", root_path, class: "header__title--text"
