@@ -5,8 +5,8 @@
     %tr
       %th Title
       %th Description
-      %th Start date
-      %th End date
+      %th Start 
+      %th End 
       %th
       %th
       %th
@@ -16,8 +16,8 @@
       %tr
         %td= event.title
         %td= event.description
-        %td= event.start_date
-        %td= event.end_date
+        %td= event.start
+        %td= event.end
         %td= link_to 'Show', event
         %td= link_to 'Edit', edit_event_path(event)
         %td= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
