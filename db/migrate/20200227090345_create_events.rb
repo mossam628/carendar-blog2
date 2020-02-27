@@ -6,6 +6,6 @@ class CreateEvents < ActiveRecord::Migration[5.2]
       t.datetime :end
       t.timestamps
     end
-    add_column :events, :user_id, :integer
+    # add_column :events, :user_id, :integer
   end
 end
