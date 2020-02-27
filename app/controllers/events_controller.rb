@@ -6,7 +6,7 @@ class EventController < ApplicationController
       format.json {
         render json:
         @event.to_json(
-          only: [:title, :start, :end]
+          only: [ :title, :start, :end]
         )
       }
     end
