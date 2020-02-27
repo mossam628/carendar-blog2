@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  body: MyText
+  disp_flg: false
+  start: 2020-02-27 20:38:32
+  end: 2020-02-27 20:38:32
+  allDay: MyString
+
+two:
+  title: MyString
+  body: MyText
+  disp_flg: false
+  start: 2020-02-27 20:38:32
+  end: 2020-02-27 20:38:32
+  allDay: MyString

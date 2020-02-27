@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :posts, except: :index
   resources :users, only: :show
   resources :carendar, only: :index
+  resources :events
 end
