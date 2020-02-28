@@ -18,19 +18,19 @@
 //= require_tree .
 
 
-$(function () {
-  function eventCalendar() {
-      return $('#calendar').fullCalendar({});
-  };
-  function clearCalendar() {
-      $('#calendar').html('');
-  };
-  $(document).on( function () {
-  eventCalendar();
-  });
-  $(document).on( clearCalendar);
+// $(function () {
+//   function eventCalendar() {
+//       return $('#calendar').fullCalendar({});
+//   };
+//   function clearCalendar() {
+//       $('#calendar').html('');
+//   };
+//   $(document).on( function () {
+//   eventCalendar();
+//   });
+//   $(document).on( clearCalendar);
 
-  $('#calendar').fullCalendar({
-  events: '/events.json'
-  });
-});
+//   $('#calendar').fullCalendar({
+//   events: '/events.json'
+//   });
+// });

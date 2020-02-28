@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :users, only: :show
   resources :carendar, only: :index
   resources :events
+  get 'events', to: 'event#index'
   get 'events', to: 'event#show'
   post 'events/create', to: 'event#create'
-  get 'events', to: 'event#events'
 end

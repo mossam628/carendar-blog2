@@ -1,17 +1,35 @@
 //設定例
 $(document).ready(function() {
-
-  var select = function(start, end) {
+  
+  var select = function(title, start, end) {
+    var title = window.prompt("title");
+      start = start.unix()
+    var d = new Date( start * 1000 );
+    var year = d.getYear() + 1900;
+    var month = d.getMonth() + 1;
+    var day   = d.getDate();
+    var hour  = ( d.getHours()   < 10 ) ? '0' + d.getHours()   : d.getHours();
+    var min   = ( d.getMinutes() < 10 ) ? '0' + d.getMinutes() : d.getMinutes();
+    var moment_start = year+"-"+month+"-"+day+" "+hour+":"+min;
+    var start = moment(moment_start).add(-9, 'hour').format("MMMM Do YYYY, h:mm");
+      end = end
+    var d = new Date( end * 1000 );
+    var year = d.getYear() + 1900;
+    var month = d.getMonth() + 1;
+    var day   = d.getDate();
+    var hour  = ( d.getHours()   < 10 ) ? '0' + d.getHours()   : d.getHours();
+    var min   = ( d.getMinutes() < 10 ) ? '0' + d.getMinutes() : d.getMinutes();
+    var moment_end = year+"-"+month+"-"+day+" "+hour+":"+min;
+    var end = moment(moment_end).add(-9, 'hour').format("MMMM Do YYYY, h:mm");
     var data = {
       event: {
         title: title,
-        start: start_time,
-        end: end_time,
-        allday: false
+        start: start,
+        end: end,
       }
     }
     $.ajax({
-     type: "POST",
+     type: "GET",
      url: "/events",
      data: data,
      success: function() {
@@ -67,7 +85,7 @@ $(document).ready(function() {
     firstHour: 9,                          // スクロール開始時間
     eventClick: function(event) { //イベントをクリックしたときに実行
       var id = event.id
-      var show_url = "/events/"+id
+      var show_url = "/events"+id
       location.href = show_url;
     },
     eventResize: function(event) { //イベントをサイズ変更した際に実行
@@ -80,7 +98,7 @@ $(document).ready(function() {
       var hour  = ( event_start_time.getHours()   < 10 ) ? '0' + event_start_time.getHours()   : event_start_time.getHours();
       var min   = ( event_start_time.getMinutes() < 10 ) ? '0' + event_start_time.getMinutes() : event_start_time.getMinutes();
       var moment_start = year+"-"+month+"-"+day+" "+hour+":"+min;
-      var start_time = moment(moment_start).add(-9, 'hour').format("YYYY-MM-DD HH:mm");
+      var start = moment(moment_start).add(-9, 'hour').format("MMMM Do YYYY, h:mm");
       var event_end_time = event._end._d
       var year = event_end_time.getYear() + 1900;
       var month = event_end_time.getMonth() + 1;
@@ -88,13 +106,12 @@ $(document).ready(function() {
       var hour  = ( event_end_time.getHours()   < 10 ) ? '0' + event_end_time.getHours()   : event_end_time.getHours();
       var min   = ( event_end_time.getMinutes() < 10 ) ? '0' + event_end_time.getMinutes() : event_end_time.getMinutes();
       var moment_end = year+"-"+month+"-"+day+" "+hour+":"+min;
-      var end_time = moment(moment_end).add(-9, 'hour').format("YYYY-MM-DD HH:mm");
+      var end = moment(moment_end).add(-9, 'hour').format("MMMM Do YYYY, h:mm");
       var data = {
         event: {
           title: event.title,
-          start: start_time,
-          end: end_time,
-          allday: false
+          start: start,
+          end: end,
         }
       }
       $.ajax({
@@ -109,7 +126,7 @@ $(document).ready(function() {
     },
     eventDrop: function(event) { //イベントをドラッグ&ドロップした際に実行
       var id = event.id
-      var update_url = "/events/"+id
+      var update_url = "/events"+id
       var event_start_time = event._start._d
       var year = event_start_time.getYear() + 1900;
       var month = event_start_time.getMonth() + 1;
@@ -117,7 +134,7 @@ $(document).ready(function() {
       var hour  = ( event_start_time.getHours()   < 10 ) ? '0' + event_start_time.getHours()   : event_start_time.getHours();
       var min   = ( event_start_time.getMinutes() < 10 ) ? '0' + event_start_time.getMinutes() : event_start_time.getMinutes();
       var moment_start = year+"-"+month+"-"+day+" "+hour+":"+min;
-      var start_time = moment(moment_start).add(-9, 'hour').format("YYYY-MM-DD HH:mm");
+      var start = moment(moment_start).add(-9, 'hour').format("MMMM Do YYYY, h:mm");
       var event_end_time = event._end._d
       var year = event_end_time.getYear() + 1900;
       var month = event_end_time.getMonth() + 1;
@@ -125,12 +142,12 @@ $(document).ready(function() {
       var hour  = ( event_end_time.getHours()   < 10 ) ? '0' + event_end_time.getHours()   : event_end_time.getHours();
       var min   = ( event_end_time.getMinutes() < 10 ) ? '0' + event_end_time.getMinutes() : event_end_time.getMinutes();
       var moment_end = year+"-"+month+"-"+day+" "+hour+":"+min;
-      var end_time = moment(moment_end).add(-9, 'hour').format("YYYY-MM-DD HH:mm");
+      var end = moment(moment_end).add(-9, 'hour').format("MMMM Do YYYY, h:mm").isValid() ;
       var data = {
         event: {
           title: event.title,
-          start: start_time,
-          end: end_time,
+          start: start,
+          end: end,
           allday: false
         }
       }
@@ -146,33 +163,3 @@ $(document).ready(function() {
     }
   });
 });
-// var select = function(start, end, ) {
-//   var title = window.prompt("title");
-//   var data = {event: {title: title,
-//                       start: start,
-//                       end: end, 
-//                       }};
-//   $.ajax({
-//       type: "POST",
-//       url: "/events.json",
-//       data: data,
-//       success: function() {
-//           calendar.fullCalendar('refetchEvents');
-//       }
-//   });
-//   calendar.fullCalendar('unselect');
-// };
-
-// var calendar = $('#calendar').fullCalendar({
-//   header: {
-//     left: 'prev,next today',
-//     center: 'title',
-//     right: 'month,agendaWeek,agendaDay'
-//   },
-      
-//   events: '/events.json',
-//   selectable: true,
-//   selectHelper: true,
-//   ignoreTimezone: false,
-//   select: select
-// });
