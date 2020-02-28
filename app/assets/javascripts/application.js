@@ -13,9 +13,9 @@
 //= require rails-ujs
 //= require activestorage
 //= require jquery
-//= require_tree .
 //= require moment
 //= require fullcalendar
+//= require_tree .
 
 
 $(function () {
