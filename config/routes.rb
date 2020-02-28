@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resources :events
   get 'events', to: 'event#show'
   post 'events/create', to: 'event#create'
+  get 'events', to: 'event#events'
 end
