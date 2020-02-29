@@ -12,6 +12,16 @@ class EventsController < ApplicationController
   end
 
   def show
+    @event = Event.all
+    # render :json => @event
+    respond_to do |format|
+      format.json {
+        render json:
+        @event.to_json(
+          only: [:title, :start, :end]
+        )
+      }
+    end
   end
 
   def new
@@ -23,7 +33,12 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-
+    # event.attributes = {
+    #   title: params[:title],
+    #   start: params[:start],
+    #   end: params[:end],
+    # }
+    
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -61,12 +76,6 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(
-        :title,
-        :start,
-        :end,
-        :color,
-        :allday
-      )
+      params.require(:event).permit( :title, :start, :end,)
     end
 end
