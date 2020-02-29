@@ -7,11 +7,9 @@
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
-    %link{:href => "fullcalendar/fullcalendar.css", :rel => "stylesheet"}/
-    %script{:src => "fullcalendar/lib/jquery.min.js"}
-    %script{:src => "fullcalendar/lib/moment.min.js"}
-    %script{:src => "fullcalendar/fullcalendar.js"}
-    %script{:src => "locale/ja.js"}
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"}
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ja.js"}
+
   %body
     %header.header
       .header__title
