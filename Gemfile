@@ -70,4 +70,3 @@ gem 'rename'
 gem 'fog-aws' 
 gem 'carrierwave'
 gem "aws-sdk-s3", require: false
-gem 'dot-env'
