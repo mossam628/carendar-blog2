@@ -37,7 +37,7 @@ $(document).ready(function() {
      data: data,
      success: function() {
        calendar.fullCalendar('refetchEvents'),
-       alert("登録しました!"),
+       alert("登録しました!");
      }
     });
     calendar.fullCalendar('unselect');
