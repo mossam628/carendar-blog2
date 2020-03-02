@@ -1,7 +1,10 @@
 .content__title
   新規記事の作成
 = form_with model: @post, class: :form, local: true do |form|
-  = form.text_field :title, placeholder: :タイトル, class: :form__title
-  = form.text_field :image, placeholder: :写真,class: :form__image
-  = form.text_area :content, placeholder: :ブログ本文, class: :form__text
+  .form__title
+    = form.text_field :title, placeholder: :タイトル, class: :form__title__text
+    = form.label :image, class: :form__title__image do
+      = icon('far', 'image')
+      = form.file_field :image, class: :form__title__image__file
+  = form.text_area :content, placeholder: ブログ本文, class: :form__text
   = form.submit '投稿する', class: :form__btn
