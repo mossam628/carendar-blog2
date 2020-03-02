@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy] #パラメータのidからレコードを特定するメソッド
 
   def index
-    @events = Event.all
+    @events = Event.includes(:user)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -12,7 +12,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.all
+    @event = Event.find(params[:id])
     # render :json => @event
     respond_to do |format|
       format.json {
