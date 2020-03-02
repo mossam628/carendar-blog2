@@ -33,12 +33,6 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    # event.attributes = {
-    #   title: params[:title],
-    #   start: params[:start],
-    #   end: params[:end],
-    # }
-    
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -47,12 +41,13 @@ class EventsController < ApplicationController
         format.html { render :new }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
+      @events = Event.where(user_id: current_user.id)
     end
   end
-
   def update
+    event = Event.find(params[:id])
     respond_to do |format|
-      if @event.update(event_params)
+      if event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { render :show, status: :ok, location: @event }
       else
@@ -60,6 +55,7 @@ class EventsController < ApplicationController
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
+    @events = Event.where(user_id: current_user.id)
   end
 
   def destroy
@@ -76,6 +72,6 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit( :title, :start, :end,)
+      params.require(:event).permit( :title, :start, :end,).merge(user_id: current_user.id)
     end
 end

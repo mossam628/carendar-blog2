@@ -2,7 +2,7 @@
 $(document).ready(function() {
 
   var select = function(start, end) {
-    var title = window.prompt("title");
+    var title = window.prompt("イベントを追加");
     start_time = start.unix()
     var d = new Date( start_time * 1000 );
     var year = d.getYear() + 1900;
@@ -21,11 +21,13 @@ $(document).ready(function() {
     var min   = ( d.getMinutes() < 10 ) ? '0' + d.getMinutes() : d.getMinutes();
     var moment_end = year+"-"+month+"-"+day+" "+hour+":"+min;
     var end_time = moment(moment_end).add(-9, 'hour').format("YYYY-MM-DD HH:mm");
+    // var user_id = user_signed_in? && current_user.id;
     var data = {
       event: {
         title: title,
         start: start_time,
         end: end_time,
+        // user_id: user_id,
         allday: false
       }
     }
@@ -34,7 +36,8 @@ $(document).ready(function() {
      url: "/events",
      data: data,
      success: function() {
-       calendar.fullCalendar('refetchEvents');
+       calendar.fullCalendar('refetchEvents'),
+       alert("登録しました!");
      }
     });
     calendar.fullCalendar('unselect');
