@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :posts, except: :index
   resources :users, only: :show
   resources :carendar, only: :index
-  resources :events, only: [:index,:show,:new,:create]
+  resources :events, only: [:index,:show,:new,:create,:update,:edit,:destroy]
   get 'events', to: 'event#show'
   post 'events/create', to: 'event#create'
 end
