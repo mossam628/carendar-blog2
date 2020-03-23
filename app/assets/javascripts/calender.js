@@ -46,8 +46,12 @@ $(document).ready(function() {
     header: {
       left: 'prev,next today',
       center: 'title',
-      right: 'month,agendaWeek,agendaDay'
+      right: 'month,agendaWeek,agendaDay',
+      events: '/events.json',
+      editable: true,
     },
+    selectable: true,
+    selectHelper: true,
     axisFormat: 'H:mm',
     timeFormat: 'H:mm',
     monthNames: ['１月','２月','３月','４月','５月','６月','７月','８月','９月','１０月','１１月','１２月'],
@@ -161,12 +165,13 @@ $(document).ready(function() {
        url: update_url,
        data: data,
        success: function() {
-         calendar.fullCalendar('refetchEvents');
+        calendar.fullCalendar('refetchEvents');
        }
       });
       calendar.fullCalendar('unselect');
     }
   });
+  return
 });
 
 // $(document).ready(function() {
