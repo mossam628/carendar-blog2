@@ -12,7 +12,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.all
+    # @event = Event.all
     # render :json => @event
     respond_to do |format|
       format.json {
@@ -63,6 +63,16 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def events
+    @event = Event.all
+    # render: json =&gt;@event
+    respond_to do | format |
+      format.json {
+        render json:
+        @event.to_json}
     end
   end
 

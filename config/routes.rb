@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   root to: 'posts#index'
   resources :posts, except: :index
   resources :users, only: :show
-  resources :carendar, only: :index
+  resources :calender, only: [:index,:show]
   resources :events, only: [:index,:show,:new,:create]
   get 'events', to: 'event#show'
   post 'events/create', to: 'event#create'
