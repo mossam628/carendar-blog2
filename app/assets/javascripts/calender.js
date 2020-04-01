@@ -124,7 +124,7 @@ $(document).ready(function() {
        url: update_url,
        data: data,
        success: function() {
-         calendar.fullCalendar('refetchEvents');
+        calendar.fullCalendar('refetchEvents');
        }
       });
       calendar.fullCalendar('unselect');
