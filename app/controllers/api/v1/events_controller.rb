@@ -8,27 +8,25 @@ module Api
       protect_from_forgery except: [:create, :update]
 
       def index
-        @events = Events.order(:id).limit(params[:limit]).offset(params[:offset])
+        @events = Event.order(:id).limit(params[:limit]).offset(params[:offset])
         json = @events
         render json: json.to_json
       end
 
       def show
-        @event = Events.find(params[:id])
+        @event = Event.find(params[:id])
         render json: @event.to_json
       end
 
       def edit
-        @event = Events.find(params[:id])
+        @event = Event.find(params[:id])
       end
 
       def update
-        @event = Events.find(params[:id])
-        event_params.require(:title)
-        event_params.require(:start)
-        event_params.require(:end)
-        # event_params.require(:color)
-        # event_params.require(:allday)
+        @event = Event.find(params[:id])
+        # event_params.require(:title)
+        # event_params.require(:start)
+        # event_params.require(:end)
         respond_to do |format|
           format.any
           if @event.update!(event_params)
@@ -41,16 +39,14 @@ module Api
       end
 
       def new
-        @event = Events.new
+        @event = Event.new
       end
 
       def create
-        event_params.require(:title)
-        event_params.require(:start)
-        event_params.require(:end)
-        # event_params.require(:color)
-        event_params.require(:allday)
-        @event = Events.new(event_params)
+        # event_params.require(:title)
+        # event_params.require(:start)
+        # event_params.require(:end)
+        @event = Event.new(event_params)
         respond_to do |format|
           format.any
           if @event.save!
@@ -62,15 +58,19 @@ module Api
       end
 
       def destroy
-        @event = Events.find(params[:id])
+        @event = Event.find(params[:id])
         @event.destroy
         render json: @event and return
       end
-
       
       private
       def event_params
-        params.require(:event).permit( :title, :start, :end,).merge(user_id: current_user.id)
+        params[:event]
+        .permit(
+          :title,
+          :start,
+          :end
+        ).merge(user_id: current_user.id)
       end
     end
   end
