@@ -1,8 +1,7 @@
-//設定例
 $(document).ready(function() {
 
   var select = function(start, end) {
-    var title = window.prompt("イベントを追加");
+    var title = window.prompt("title");
     start_time = start.unix()
     var d = new Date( start_time * 1000 );
     var year = d.getYear() + 1900;
@@ -21,23 +20,20 @@ $(document).ready(function() {
     var min   = ( d.getMinutes() < 10 ) ? '0' + d.getMinutes() : d.getMinutes();
     var moment_end = year+"-"+month+"-"+day+" "+hour+":"+min;
     var end_time = moment(moment_end).add(-9, 'hour').format("YYYY-MM-DD HH:mm");
-    // var user_id = user_signed_in? && current_user.id;
     var data = {
       event: {
         title: title,
         start: start_time,
         end: end_time,
-        // user_id: user_id,
         allday: false
       }
     }
     $.ajax({
      type: "POST",
-     url: "/events",
+     url: "/api/v1/events",
      data: data,
      success: function() {
-       calendar.fullCalendar('refetchEvents'),
-       alert("登録しました!");
+       calendar.fullCalendar('refetchEvents');
      }
     });
     calendar.fullCalendar('unselect');
@@ -54,7 +50,7 @@ $(document).ready(function() {
     monthNamesShort: ['１月','２月','３月','４月','５月','６月','７月','８月','９月','１０月','１１月','１２月'],
     dayNames: ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'],
     dayNamesShort: ['日','月','火','水','木','金','土'],
-    events: "/events",
+    events: "/api/v1/events",
     editable: true,        // 編集可
     selectable: true,      // 選択可
     selectHelper: true,    // 選択時にプレースホルダーを描画
@@ -124,7 +120,7 @@ $(document).ready(function() {
        url: update_url,
        data: data,
        success: function() {
-        calendar.fullCalendar('refetchEvents');
+         calendar.fullCalendar('refetchEvents');
        }
       });
       calendar.fullCalendar('unselect');
@@ -168,7 +164,6 @@ $(document).ready(function() {
     }
   });
 });
-
 // $(document).ready(function() {
 //   create_event = function(title, start, end){
 //     $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
