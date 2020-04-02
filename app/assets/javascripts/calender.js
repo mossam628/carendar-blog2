@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
   var select = function(start, end) {
     var title = window.prompt("予定名");
     start_time = start.unix()
@@ -30,10 +29,10 @@ $(document).ready(function() {
     }
     $.ajax({
      type: "POST",
-     url: "/api/v1/events",
+     url: "/events",
      data: data,
      success: function() {
-       calendar.fullCalendar('refetchEvents');
+      calendar.fullCalendar('refetchEvents');
      }
     }).done(function(data){
         alert("登録しました!");
@@ -55,7 +54,7 @@ $(document).ready(function() {
     monthNamesShort: ['１月','２月','３月','４月','５月','６月','７月','８月','９月','１０月','１１月','１２月'],
     dayNames: ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'],
     dayNamesShort: ['日','月','火','水','木','金','土'],
-    events: "/api/v1/events",
+    events: "/events",
     editable: true,        // 編集可
     selectable: true,      // 選択可
     selectHelper: true,    // 選択時にプレースホルダーを描画
@@ -94,7 +93,7 @@ $(document).ready(function() {
     },
     eventResize: function(event) { //イベントをサイズ変更した際に実行
       var id = event.id
-      var update_url = "/api/v1/events/"+id
+      var update_url = "/events/"+id
       var event_start_time = event._start._d
       var year = event_start_time.getYear() + 1900;
       var month = event_start_time.getMonth() + 1;
@@ -131,7 +130,7 @@ $(document).ready(function() {
     },
     eventDrop: function(event) { //イベントをドラッグ&ドロップした際に実行
       var id = event.id
-      var update_url = "/api/v1/events/"+id
+      var update_url = "/events/"+id
       var event_start_time = event._start._d
       var year = event_start_time.getYear() + 1900;
       var month = event_start_time.getMonth() + 1;
