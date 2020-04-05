@@ -73,3 +73,4 @@ gem "aws-sdk-s3", require: false
 gem 'execjs'
 gem 'mini_racer'
 gem 'libv8'
+gem 'grape'

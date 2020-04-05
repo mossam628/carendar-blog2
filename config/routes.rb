@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :api, { format: 'json' } do
+    namespace :v1 do
+      resources :events
+    end
+  end
   get 'events/index'
   get 'events/show'
   get 'events/new'
@@ -12,4 +17,5 @@ Rails.application.routes.draw do
   resources :events, only: [:index,:show,:new,:create]
   get 'events', to: 'event#show'
   post 'events/create', to: 'event#create'
+  
 end
