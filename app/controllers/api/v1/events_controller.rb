@@ -10,12 +10,12 @@ module Api
       def index
         @events = Event.order(:id).limit(params[:limit]).offset(params[:offset])
         json = @events
-        render json: json.to_json
+        render json: json.to_json 
       end
 
       def show
         @event = Event.find(params[:id])
-        render json: @event.to_json
+        render json: @event.to_json and return
       end
 
       def edit

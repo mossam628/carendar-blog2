@@ -89,13 +89,14 @@ $(document).ready(function() {
     firstHour: 9,
     eventClick: function(event) {
       var id = event.id
-      var show_url = "/events/"+id
+      var show_url = "/api/v1/events/"+id
       location.href = show_url;
     },
-    eventResize: function(event) { //イベントをサイズ変更した際に実行
+    eventResize: function(event) {
+      console.log(event) //イベントをサイズ変更した際に実行
       var id = event.id
       var update_url = "/api/v1/events/"+id
-      var event_start_time = event._start._d
+      var event_start_time = event.start._d
       var year = event_start_time.getYear() + 1900;
       var month = event_start_time.getMonth() + 1;
       var day   = event_start_time.getDate();
@@ -103,7 +104,7 @@ $(document).ready(function() {
       var min   = ( event_start_time.getMinutes() < 10 ) ? '0' + event_start_time.getMinutes() : event_start_time.getMinutes();
       var moment_start = year+"-"+month+"-"+day+" "+hour+":"+min;
       var start_time = moment(moment_start).add(-9, 'hour').format("YYYY-MM-DD HH:mm:00");
-      var event_end_time = event._end._d
+      var event_end_time = event.end._d
       var year = event_end_time.getYear() + 1900;
       var month = event_end_time.getMonth() + 1;
       var day   = event_end_time.getDate();
@@ -111,6 +112,13 @@ $(document).ready(function() {
       var min   = ( event_end_time.getMinutes() < 10 ) ? '0' + event_end_time.getMinutes() : event_end_time.getMinutes();
       var moment_end = year+"-"+month+"-"+day+" "+hour+":"+min;
       var end_time = moment(moment_end).add(-9, 'hour').format("YYYY-MM-DD HH:mm:00");
+      var title = prompt('予定を入力してください:', event.title);
+        if(title && title!=""){
+          event.title = title;
+          calendar.fullCalendar('updateEvent', event); //イベント（予定）の修正
+        }else{
+          calendar.fullCalendar("removeEvents", event.id); //イベント（予定）の削除				
+        }
       var data = {
         event: {
           title: event.title,
@@ -141,7 +149,7 @@ $(document).ready(function() {
       var min   = ( event_start_time.getMinutes() < 10 ) ? '0' + event_start_time.getMinutes() : event_start_time.getMinutes();
       var moment_start = year+"-"+month+"-"+day+" "+hour+":"+min;
       var start_time = moment(moment_start).add(-9, 'hour').format("YYYY-MM-DD HH:mm:00");
-      var event_end_time = event._end._d
+      var event_end_time = event.end._d
       var year = event_end_time.getYear() + 1900;
       var month = event_end_time.getMonth() + 1;
       var day   = event_end_time.getDate();
