@@ -9,4 +9,4 @@
     = link_to "削除", post_path(@post.id), method: :delete, class: "postManage__delete"
 .postText
   = simple_format @post.content
-  = simple_format image_tag @post.image
+  = image_tag @post.image.url
